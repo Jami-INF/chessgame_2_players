@@ -5,7 +5,8 @@ class Rook{
         this.y = y;
         this.name = "rook";
         this.image = new Image();
-        this.image.src = "public/img/pawns/rook" + color + ".png";
+        this.image.src = "public/img/pawns/rook_" + color + ".png";
+        this.url = "public/img/pawns/rook_" + this.color + ".png";
     }
     getColor(){
         return this.color;

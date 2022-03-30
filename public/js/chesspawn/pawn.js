@@ -5,7 +5,7 @@ class Pawn{
         this.y = y;
         this.name = "pawn";
         this.image = new Image();
-        this.image.src = "public/img/pawns/pawn" + color + ".png";
+        this.image.src = "public/img/pawns/pawn_" + color + ".png";
     }
     getColor(){
         return this.color;

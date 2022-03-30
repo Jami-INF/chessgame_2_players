@@ -1,0 +1,1 @@
+//import AbstractPiece from 'public/js/chesspawn/abstractPiece.js';

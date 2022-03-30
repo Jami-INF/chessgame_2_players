@@ -5,7 +5,7 @@ class Bishop{
         this.y = y;
         this.name = "bishop";
         this.image = new Image();
-        this.image.src = "public/img/pawns/bishop" + color + ".png";
+        this.image.src = "public/img/pawns/bishop_" + color + ".png";
     }
     getColor(){
         return this.color;

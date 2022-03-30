@@ -5,7 +5,7 @@ class Queen{
         this.y = y;
         this.name = "queen";
         this.image = new Image();
-        this.image.src = "public/img/pawns/queen" + color + ".png";
+        this.image.src = "public/img/pawns/queen_" + color + ".png";
     }
     getColor(){
         return this.color;
