@@ -44,16 +44,32 @@ class Pawn{
         this.y = y;
     }
     firstMoveUp(){
-        this.y = this.y - 2;
+        if(this.color == "white"){
+            this.x = this.x - 2;
+        }else{
+            this.x = this.x + 2;
+        }
     }
     moveUp(){
-        this.y = this.y - 1;
+        if(this.color == "white"){
+            this.x = this.x - 1;
+        }else{
+            this.x = this.x + 1;
+        }
     }
     getfirstMoveUp(){
-        return [this.x, this.y - 2];
+        if(this.color == "white"){
+            return [this.x - 2, this.y];
+        }else{
+            return [this.x + 2, this.y];    
+        }
     }
     getMoveUp(){
-        return [this.x, this.y - 1];
+        if(this.color == "white"){
+            return [this.x - 1, this.y];
+        }else{
+            return [this.x + 1, this.y];    
+        }
     }
 
     getAllMovment(){

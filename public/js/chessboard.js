@@ -43,7 +43,6 @@ class ChessBoard{
     updateBoardHTML(){
         
         this.clearBoard();
-
         let emplacementBoard = document.querySelector('#board');
         let boardHTML = document.createElement('table');
         boardHTML.setAttribute('id', 'board');
@@ -90,13 +89,19 @@ class ChessBoard{
         emplacementBoard.addEventListener('click', function(e){
             let x = e.target.getAttribute('x');
             let y = e.target.getAttribute('y');
+            
             if(chessAcces.board[x][y].isSelected == true){
                 chessAcces.board[x][y].isSelected = false;
+                chessAcces.resetSelected();
+                chessAcces.resetMoveAvaible();
             }else{
+                chessAcces.resetSelected();
+                chessAcces.resetMoveAvaible();
                 chessAcces.board[x][y].isSelected = true;
+                chessAcces.displayAllMovment();
             }
             //chessAcces.board[y][x].isSelected = true;
-            chessAcces.displayAllMovment();
+            
             chessAcces.updateBoardHTML();
         });
     }
@@ -126,6 +131,20 @@ class ChessBoard{
             }
         }
     }
-
+    resetSelected(){
+        for(let i = 0; i < 8; i++){
+            for(let j = 0; j < 8; j++){
+                this.board[i][j].isSelected = false;
+            }
+        }
+    }
+    resetMoveAvaible(){
+        for(let i = 0; i < 8; i++){
+            for(let j = 0; j < 8; j++){
+                this.board[i][j].isMoveAvaible = false;
+            }
+        }
+    }
+    
     
 }
