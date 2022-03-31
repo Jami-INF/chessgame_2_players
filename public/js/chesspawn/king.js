@@ -6,6 +6,8 @@ class King{
         this.name = "king";
         this.image = new Image();
         this.image.src = "public/img/pawns/king_" + color + ".png";
+        this.isSelected = false;
+        this.isMoveAvaible = false;
     }
     getColor(){
         return this.color;
@@ -34,36 +36,79 @@ class King{
     setImage(image){
         this.image = image;
     }
+    setSelected(isSelected){
+        this.isSelected = isSelected;
+    }
     move(x, y){
         this.x = x;
         this.y = y;
     }
-    moveUp(nb){
-        this.y = this.y - nb;
+    moveUp(){
+        this.y = this.y - 1;
     }
-    moveDown(nb){
-        this.y = this.y + nb;
+    moveDown(){
+        this.y = this.y + 1;
     }
-    moveLeft(nb){
-        this.x = this.x - nb;
+    moveLeft(){
+        this.x = this.x - 1;
     }
-    moveRight(nb){
-        this.x = this.x + nb;
+    moveRight(){
+        this.x = this.x + 1;
     }
-    moveUpLeft(nb){
-        this.x = this.x - nb;
-        this.y = this.y - nb;
+    moveUpLeft(){
+        this.x = this.x - 1;
+        this.y = this.y - 1;
     }
-    moveUpRight(nb){
-        this.x = this.x + nb;
-        this.y = this.y - nb;
+    moveUpRight(){
+        this.x = this.x + 1;
+        this.y = this.y - 1;
     }
-    moveDownLeft(nb){
-        this.x = this.x - nb;
-        this.y = this.y + nb;
+    moveDownLeft(){
+        this.x = this.x - 1;
+        this.y = this.y + 1;
     }
-    moveDownRight(nb){
-        this.x = this.x + nb;
-        this.y = this.y + nb;
+    moveDownRight(){
+        this.x = this.x + 1;
+        this.y = this.y + 1;
+    }
+
+    getmoveUp(){
+        return  [this.x, this.y - 1];
+    }
+    getmoveDown(){
+        return [this.x, this.y + 1];
+    }
+    getmoveLeft(){
+        return [this.x - 1, this.y];
+    }
+    getmoveRight(){
+        return [this.x + 1, this.y];
+    }
+
+    getmoveUpLeft(){
+        return [this.x -  1, this.y -  1];
+    }
+    getmoveUpRight(){
+        return [this.x + 1, this.y -  1];
+    }
+    getmoveDownLeft(){
+        return [this.x - 1, this.y +  1];
+    }
+    getmoveDownRight(){
+        return [this.x + 1, this.y +  1];
+    }
+
+    getAllMovment(){
+        let allMove = [];
+        allMove.push(this.getmoveUp());
+        allMove.push(this.getmoveDown());
+        allMove.push(this.getmoveLeft());
+        allMove.push(this.getmoveRight());
+        allMove.push(this.getmoveUpLeft());
+        allMove.push(this.getmoveUpRight());
+        allMove.push(this.getmoveDownLeft());
+        allMove.push(this.getmoveDownRight());
+        
+        return allMove;
     }
 }

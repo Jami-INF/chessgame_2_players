@@ -7,7 +7,7 @@ class ChessBoard{
     init(){
         this.initBoard();
         this.initPieces();
-        this.initBoardHTML();
+        this.updateBoardHTML();
         this.initEvents();
     }
     initBoard(){
@@ -40,7 +40,10 @@ class ChessBoard{
             this.board[6][i] = new Pawn('white', 6, i);
         }
     }
-    initBoardHTML(){
+    updateBoardHTML(){
+        
+        this.clearBoard();
+
         let emplacementBoard = document.querySelector('#board');
         let boardHTML = document.createElement('table');
         boardHTML.setAttribute('id', 'board');
@@ -56,6 +59,12 @@ class ChessBoard{
                 let boxTab = document.createElement('td');
                 boxHTML.setAttribute('y',box.y);
                 boxHTML.setAttribute('x',box.x);
+                if(box.isSelected){
+                    boxHTML.style.backgroundColor  = 'red';
+                }
+                if(box.isMoveAvaible){
+                    boxHTML.style.backgroundColor  = 'green';
+                }
                 boxHTML.style.backgroundImage = 'url("public/img/pawns/'+box.name+'_'+box.color+'.png")';
                 boxHTML.style.width = '100px';
                 boxHTML.style.height = '100px';
@@ -69,8 +78,54 @@ class ChessBoard{
         });
         emplacementBoard.appendChild(boardHTML);
     }
+
+    clearBoard(){
+        let emplacementBoard = document.querySelector('#board');
+        emplacementBoard.innerHTML = '';
+    }
     
     initEvents(){
-        console.log("initEvents");
+        let chessAcces = this;
+        let emplacementBoard = document.querySelector('#board');
+        emplacementBoard.addEventListener('click', function(e){
+            let x = e.target.getAttribute('x');
+            let y = e.target.getAttribute('y');
+            if(chessAcces.board[x][y].isSelected == true){
+                chessAcces.board[x][y].isSelected = false;
+            }else{
+                chessAcces.board[x][y].isSelected = true;
+            }
+            //chessAcces.board[y][x].isSelected = true;
+            chessAcces.displayAllMovment();
+            chessAcces.updateBoardHTML();
+        });
     }
+    displayMovment(x,y){
+        let chessAcces = this;
+        let caseTarget = this.board[x][y];
+        let movments = caseTarget.getAllMovment();
+        movments.forEach(function(movment){   
+            try{
+                console.log(movment[0]+' '+movment[1]);
+                let caseMovment = chessAcces.board[movment[0]][movment[1]];
+                caseMovment.isMoveAvaible = true;
+            }catch(e){
+                //console.log(e);
+            }
+
+        });
+        console.log(movments);
+    }
+    displayAllMovment(){
+        let chessAcces = this;
+        for(let i = 0; i < 8; i++){
+            for(let j = 0; j < 8; j++){
+                if(this.board[i][j].isSelected == true){
+                    chessAcces.displayMovment(i,j);
+                }
+            }
+        }
+    }
+
+    
 }

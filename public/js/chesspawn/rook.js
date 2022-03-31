@@ -6,7 +6,8 @@ class Rook{
         this.name = "rook";
         this.image = new Image();
         this.image.src = "public/img/pawns/rook_" + color + ".png";
-        this.url = "public/img/pawns/rook_" + this.color + ".png";
+        this.isSelected = false;
+        this.isMoveAvaible = false;
     }
     getColor(){
         return this.color;
@@ -22,6 +23,9 @@ class Rook{
     }
     getImage(){
         return this.image;
+    }
+    setSelected(isSelected){
+        this.isSelected = isSelected;
     }
     setX(x){
         this.x = x;
@@ -39,16 +43,39 @@ class Rook{
         this.x = x;
         this.y = y;
     }
-    moveUp(){
-        this.y = this.y - 1;
+    moveUp(nb){
+        this.y = this.y - nb;
     }
-    moveDown(){
-        this.y = this.y + 1;
+    moveDown(nb){
+        this.y = this.y + nb;
     }
-    moveLeft(){
-        this.x = this.x - 1;
+    moveLeft(nb){
+        this.x = this.x - nb;
     }
-    moveRight(){
-        this.x = this.x + 1;
+    moveRight(nb){
+        this.x = this.x + nb;
+    }
+
+    getmoveUp(nb){
+        return [this.x, this.y - nb];
+    }
+    getmoveDown(nb){
+        return [this.x, this.y + nb];
+    }
+    getmoveLeft(nb){
+        return [this.x - nb, this.y];
+    }
+    getmoveRight(nb){
+        return [this.x + nb, this.y];
+    }
+    getAllMovment(){
+        let allMove = [];
+        for(var i = 1; i < 8; i++){
+            allMove.push(this.getmoveUp(i));
+            allMove.push(this.getmoveDown(i));
+            allMove.push(this.getmoveLeft(i));
+            allMove.push(this.getmoveRight(i));
+        }
+        return allMove;
     }
 }

@@ -6,6 +6,8 @@ class Pawn{
         this.name = "pawn";
         this.image = new Image();
         this.image.src = "public/img/pawns/pawn_" + color + ".png";
+        this.isSelected = false;
+        this.isMoveAvaible = false;
     }
     getColor(){
         return this.color;
@@ -21,6 +23,9 @@ class Pawn{
     }
     getImage(){
         return this.image;
+    }
+    setSelected(isSelected){
+        this.isSelected = isSelected;
     }
     setX(x){
         this.x = x;
@@ -43,5 +48,18 @@ class Pawn{
     }
     moveUp(){
         this.y = this.y - 1;
+    }
+    getfirstMoveUp(){
+        return [this.x, this.y - 2];
+    }
+    getMoveUp(){
+        return [this.x, this.y - 1];
+    }
+
+    getAllMovment(){
+        let allMove = [];
+        allMove.push(this.getMoveUp());
+        allMove.push(this.getfirstMoveUp());
+        return allMove;
     }
 }

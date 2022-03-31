@@ -6,6 +6,8 @@ class Knight{
         this.name = "knight";
         this.image = new Image();
         this.image.src = "public/img/pawns/knight_" + color + ".png";
+        this.isSelected = false;
+        this.isMoveAvaible = false;
     }
     getColor(){
         return this.color;
@@ -33,6 +35,9 @@ class Knight{
     }
     setImage(image){
         this.image = image;
+    }
+    setSelected(isSelected){
+        this.isSelected = isSelected;
     }
     move(x, y){
         this.x = x;
@@ -69,5 +74,44 @@ class Knight{
     moveLeftDown(){
         this.x = this.x - 1;
         this.y = this.y + 2;
+    }
+
+    getmoveUpLeft(){
+        return [this.x - 2, this.y - 1];
+    }
+    getmoveUpRight(){
+        return [this.x + 2, this.y - 1];
+    }
+    getmoveDownLeft(){
+        return [this.x - 2, this.y + 1];
+    }
+    getmoveDownRight(){
+        return [this.x + 2, this.y + 1];
+    }
+    getmoveLeftUp(){
+        return [this.x - 1, this.y - 2];
+    }
+    getmoveLeftDown(){
+        return [this.x - 1, this.y + 2];
+    }
+    getmoveRightUp(){
+        return [this.x + 1, this.y - 2];
+    }
+    getmoveRightDown(){
+        return [this.x + 1, this.y + 2];
+    }
+    
+    getAllMovment(){
+        let allMove = [];
+        allMove.push(this.getmoveUpLeft());
+        allMove.push(this.getmoveUpRight());
+        allMove.push(this.getmoveDownLeft());
+        allMove.push(this.getmoveDownRight());
+        allMove.push(this.getmoveRightUp());
+        allMove.push(this.getmoveRightDown());
+        allMove.push(this.getmoveLeftUp());
+        allMove.push(this.getmoveLeftDown());
+    
+        return allMove;
     }
 }
