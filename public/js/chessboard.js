@@ -112,14 +112,11 @@ class ChessBoard{
         emplacementBoard.addEventListener('click', function(e){
             let x = e.target.getAttribute('x');
             let y = e.target.getAttribute('y');
-            console.log( chessAcces.board[x][y].x + ' ' + chessAcces.board[x][y].y + ' ' + chessAcces.board[x][y].name + ' ' + chessAcces.board[x][y].color);
+            //console.log( chessAcces.board[x][y].x + ' ' + chessAcces.board[x][y].y + ' ' + chessAcces.board[x][y].name + ' ' + chessAcces.board[x][y].color);
             for (let i = 0; i < 8; i++) {
                 for (let j = 0; j < 8; j++) {
                     try{
-                        //console.log(chessAcces.board[i][j].getAllMovment());
                         if(chessAcces.board[i][j].isSelected){
-                            console.log(chessAcces.board[i][j].getAllMovment());
-                            console.log([parseInt(x),parseInt(y)]);
                             if(JSON.stringify(chessAcces.board[i][j].getAllMovment()).includes(JSON.stringify([parseInt(x),parseInt(y)]))){
                                 chessAcces.board[x][y] = chessAcces.createPiece(x,y,chessAcces.board[i][j].name,chessAcces.board[i][j].color);
                                 chessAcces.board[i][j] = new Piece(i, j);
@@ -156,15 +153,12 @@ class ChessBoard{
         let movments = caseTarget.getAllMovment();
         movments.forEach(function(movment){   
             try{
-                //console.log(movment[0]+' '+movment[1]);
                 let caseMovment = chessAcces.board[movment[0]][movment[1]];
                 caseMovment.isMoveAvaible = true;
             }catch(e){
-                //console.log(e);
             }
 
         });
-        //console.log(movments);
     }
     displayAllMovment(){
         let chessAcces = this;
