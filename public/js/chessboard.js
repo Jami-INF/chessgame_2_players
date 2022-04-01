@@ -39,6 +39,12 @@ class ChessBoard{
             this.board[1][i] = new Pawn('black', 1, i);
             this.board[6][i] = new Pawn('white', 6, i);
         }
+        for(let i = 0; i < 8; i++){
+            for(let j = 2; j < 6; j++){
+                this.board[j][i] = new Piece(j, i);
+            }
+        
+        }
     }
     updateBoardHTML(){
         
@@ -82,6 +88,23 @@ class ChessBoard{
         let emplacementBoard = document.querySelector('#board');
         emplacementBoard.innerHTML = '';
     }
+    createPiece(x,y,name,color){
+        switch
+        (name) {
+            case 'pawn':
+                return new Pawn(color,parseInt(x),parseInt(y));
+            case 'rook':
+                return new Rook(color,parseInt(x),parseInt(y));
+            case 'knight':
+                return new Knight(color,parseInt(x),parseInt(y));
+            case 'bishop':
+                return new Bishop(color,parseInt(x),parseInt(y));
+            case 'queen':
+                return new Queen(color,parseInt(x),parseInt(y));
+            case 'king':
+                return new King(color,parseInt(x),parseInt(y));
+        }
+    }
     
     initEvents(){
         let chessAcces = this;
@@ -89,11 +112,33 @@ class ChessBoard{
         emplacementBoard.addEventListener('click', function(e){
             let x = e.target.getAttribute('x');
             let y = e.target.getAttribute('y');
-            
+            console.log( chessAcces.board[x][y].x + ' ' + chessAcces.board[x][y].y + ' ' + chessAcces.board[x][y].name + ' ' + chessAcces.board[x][y].color);
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    try{
+                        //console.log(chessAcces.board[i][j].getAllMovment());
+                        if(chessAcces.board[i][j].isSelected){
+                            console.log(chessAcces.board[i][j].getAllMovment());
+                            console.log([parseInt(x),parseInt(y)]);
+                            if(JSON.stringify(chessAcces.board[i][j].getAllMovment()).includes(JSON.stringify([parseInt(x),parseInt(y)]))){
+                                chessAcces.board[x][y] = chessAcces.createPiece(x,y,chessAcces.board[i][j].name,chessAcces.board[i][j].color);
+                                chessAcces.board[i][j] = new Piece(i, j);
+                                chessAcces.resetSelected();
+                                chessAcces.resetMoveAvaible();
+                            }
+                        }
+                    }catch(e){
+                        console.log(e);
+                    }
+                
+                }
+            }
+
             if(chessAcces.board[x][y].isSelected == true){
                 chessAcces.board[x][y].isSelected = false;
                 chessAcces.resetSelected();
                 chessAcces.resetMoveAvaible();
+                //chessAcces.moovePiece(x,y);
             }else{
                 chessAcces.resetSelected();
                 chessAcces.resetMoveAvaible();
@@ -111,7 +156,7 @@ class ChessBoard{
         let movments = caseTarget.getAllMovment();
         movments.forEach(function(movment){   
             try{
-                console.log(movment[0]+' '+movment[1]);
+                //console.log(movment[0]+' '+movment[1]);
                 let caseMovment = chessAcces.board[movment[0]][movment[1]];
                 caseMovment.isMoveAvaible = true;
             }catch(e){
@@ -119,7 +164,7 @@ class ChessBoard{
             }
 
         });
-        console.log(movments);
+        //console.log(movments);
     }
     displayAllMovment(){
         let chessAcces = this;
